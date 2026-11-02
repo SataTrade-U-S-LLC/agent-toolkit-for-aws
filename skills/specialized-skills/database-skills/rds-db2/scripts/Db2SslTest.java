@@ -116,17 +116,11 @@ public class Db2SslTest {
         return ctx;
     }
 
-    // Trust-all context for baseline check
+    // Baseline context using default JVM trust configuration
     static SSLContext buildTrustAllContext() throws Exception {
-        TrustManager[] trustAll = new TrustManager[]{
-            new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
-                public void checkClientTrusted(X509Certificate[] c, String a) {}
-                public void checkServerTrusted(X509Certificate[] c, String a) {}
-            }
-        };
         SSLContext ctx = SSLContext.getInstance("TLS");
-        ctx.init(null, trustAll, null);
+        // Use default trust managers (system/JVM trust store), do not trust all certificates.
+        ctx.init(null, null, null);
         return ctx;
     }
 
