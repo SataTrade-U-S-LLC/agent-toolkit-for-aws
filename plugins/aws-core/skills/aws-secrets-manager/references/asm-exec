@@ -385,7 +385,7 @@ def resolve_one(ref):
             obj = json.loads(value)
             value = obj[json_key]
         except (json.JSONDecodeError, KeyError, TypeError):
-            print(f"asm-exec: ERROR: JSON key '{json_key}' not found in: {secret_name}", file=sys.stderr)
+            print(f"asm-exec: ERROR: JSON key '{json_key}' not found in resolved secret payload", file=sys.stderr)
             sys.exit(1)
         if not isinstance(value, str):
             value = json.dumps(value)
